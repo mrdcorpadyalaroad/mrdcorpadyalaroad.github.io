@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MRD CORPORATION</title>
 
-    <!-- FAVICON (WHITE BUILDING ICON) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='16' height='20' x='4' y='2' rx='2' ry='2'/><path d='M9 22v-4h6v4'/><path d='M8 6h.01'/><path d='M16 6h.01'/><path d='M12 6h.01'/><path d='M12 10h.01'/><path d='M12 14h.01'/><path d='M16 10h.01'/><path d='M16 14h.01'/><path d='M8 10h.01'/><path d='M8 14h.01'/></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='16' height='20' x='4' y='2' rx='2' ry='2'/><path d='M9 22v-4h6v4'/><path d='M8 6h.01'/><path d='M16 6h.01'/><path d='M12 6h.01'/><path d='M12 14h.01'/><path d='M16 14h.01'/><path d='M16 14h.01'/><path d='M8 10h.01'/><path d='M8 14h.01'/></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -25,6 +24,7 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
+            padding-bottom: 40px;
         }
 
         header {
@@ -129,7 +129,6 @@
             gap: 8px;
         }
 
-        /* BLUE TAB (PHONE) */
         .tab-btn.tab-blue.active {
             background: rgba(0, 176, 255, 0.08);
             border-color: #00b0ff;
@@ -137,7 +136,6 @@
             box-shadow: 0 0 20px rgba(0, 176, 255, 0.3);
         }
 
-        /* RED TAB (EMAIL) */
         .tab-btn.tab-red.active {
             background: rgba(255, 51, 88, 0.08);
             border-color: #ff3358;
@@ -145,7 +143,6 @@
             box-shadow: 0 0 20px rgba(255, 51, 88, 0.3);
         }
 
-        /* ORANGE TAB (TIMINGS) */
         .tab-btn.tab-orange.active {
             background: rgba(255, 120, 0, 0.08);
             border-color: #ff7800;
@@ -175,7 +172,7 @@
             grid-template-columns: 1fr 1.1fr;
             gap: 40px;
             align-items: center;
-            padding-bottom: 60px;
+            padding-bottom: 40px;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -191,10 +188,10 @@
             letter-spacing: -0.5px;
         }
 
-        /* COLOR HEADINGS */
         .blue-text { color: #00b0ff; text-shadow: 0 0 20px rgba(0, 176, 255, 0.3); }
         .red-text { color: #ff3358; text-shadow: 0 0 20px rgba(255, 51, 88, 0.3); }
         .orange-text { color: #ff7800; text-shadow: 0 0 20px rgba(255, 120, 0, 0.3); }
+        .purple-text { color: #a855f7; text-shadow: 0 0 20px rgba(168, 85, 247, 0.3); }
 
         .slide-left .subtitle {
             color: #8f9ba8;
@@ -229,12 +226,10 @@
             flex-shrink: 0;
         }
 
-        /* FEATURE ICONS COLORS */
         .blue-icon { border: 1.5px solid #00b0ff; color: #00b0ff; box-shadow: 0 0 10px rgba(0, 176, 255, 0.3); }
         .red-icon { border: 1.5px solid #ff3358; color: #ff3358; box-shadow: 0 0 10px rgba(255, 51, 88, 0.3); }
         .orange-icon { border: 1.5px solid #ff7800; color: #ff7800; box-shadow: 0 0 10px rgba(255, 120, 0, 0.3); }
 
-        /* BUTTON STYLES */
         .action-btn {
             display: inline-flex;
             align-items: center;
@@ -397,6 +392,84 @@
             color: #ff4d4d;
         }
 
+        /* BOTTOM RIGHT FOUNDER SECTION */
+        .founder-wrapper {
+            max-width: 1200px;
+            width: 100%;
+            margin: 30px auto 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .founder-card {
+            width: 100%;
+            max-width: 580px;
+            background: rgba(13, 17, 23, 0.85);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            border-radius: 24px;
+            padding: 32px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.08);
+            position: relative;
+        }
+
+        .founder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .founder-badge {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #a855f7;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .founder-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .founder-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .founder-role {
+            font-size: 11px;
+            font-weight: 800;
+            color: #a855f7;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .founder-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .founder-desc {
+            font-size: 13px;
+            color: #8f9ba8;
+            line-height: 1.5;
+        }
+
         .toast {
             position: fixed;
             bottom: 30px;
@@ -421,87 +494,26 @@
             opacity: 1;
         }
 
-        /* MOBILE & TABLET RESPONSIVE STYLES */
         @media (max-width: 900px) {
-            header {
-                padding: 20px;
-            }
-
-            .hero {
-                padding: 20px 16px 10px 16px;
-            }
-
-            .hero h1 {
-                font-size: 38px;
-                letter-spacing: -0.5px;
-            }
-
-            .hero p {
-                font-size: 15px;
-                margin-bottom: 24px;
-            }
-
-            .tab-container {
-                gap: 8px;
-                margin-bottom: 30px;
-            }
-
-            .tab-btn {
-                padding: 10px 18px;
-                font-size: 11px;
-                flex: 1 1 auto;
-                justify-content: center;
-            }
-
-            .main-wrapper {
-                padding: 0 16px;
-            }
-
-            .slide {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding-bottom: 40px;
-            }
-
-            .slide-left h2 {
-                font-size: 32px;
-            }
-
-            .slide-left .subtitle {
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-
-            .features-list {
-                gap: 12px;
-                margin-bottom: 24px;
-            }
-
-            .feature-item {
-                font-size: 14px;
-            }
-
-            .action-btn {
-                width: 100%;
-                padding: 14px 20px;
-                font-size: 14px;
-            }
-
-            .card {
-                padding: 24px;
-                border-radius: 18px;
-            }
-
-            .card-title {
-                font-size: 22px;
-            }
-
-            .toast {
-                left: 20px;
-                right: 20px;
-                bottom: 20px;
-                justify-content: center;
-            }
+            header { padding: 20px; }
+            .hero { padding: 20px 16px 10px 16px; }
+            .hero h1 { font-size: 38px; letter-spacing: -0.5px; }
+            .hero p { font-size: 15px; margin-bottom: 24px; }
+            .tab-container { gap: 8px; margin-bottom: 30px; }
+            .tab-btn { padding: 10px 18px; font-size: 11px; flex: 1 1 auto; justify-content: center; }
+            .main-wrapper { padding: 0 16px; }
+            .slide { grid-template-columns: 1fr; gap: 30px; padding-bottom: 30px; }
+            .slide-left h2 { font-size: 32px; }
+            .slide-left .subtitle { font-size: 14px; margin-bottom: 20px; }
+            .features-list { gap: 12px; margin-bottom: 24px; }
+            .feature-item { font-size: 14px; }
+            .action-btn { width: 100%; padding: 14px 20px; font-size: 14px; }
+            .card { padding: 24px; border-radius: 18px; }
+            .card-title { font-size: 22px; }
+            .founder-wrapper { justify-content: center; }
+            .founder-grid { grid-template-columns: 1fr; gap: 14px; }
+            .founder-card { padding: 20px; }
+            .toast { left: 20px; right: 20px; bottom: 20px; justify-content: center; }
         }
     </style>
 </head>
@@ -522,7 +534,6 @@
         <p>Connecting businesses with next-generation communication systems. Reach out via phone, email, or check operating hours.</p>
     </section>
 
-    <!-- Navigation Tabs -->
     <div class="tab-container">
         <button class="tab-btn tab-blue active" id="tab-phone" onclick="switchTab('phone')">
             <i data-lucide="phone" size="16"></i> PHONE
@@ -535,11 +546,9 @@
         </button>
     </div>
 
-    <!-- Main Content Slider -->
     <div class="main-wrapper">
         <div class="content-slider" id="slider">
 
-            <!-- PHONE SLIDE (BLUE) -->
             <div class="slide active-slide" id="slide-phone">
                 <div class="slide-left">
                     <h2 class="blue-text">DIRECT CALL</h2>
@@ -565,7 +574,6 @@
                 </div>
             </div>
 
-            <!-- EMAIL SLIDE (RED) -->
             <div class="slide" id="slide-email">
                 <div class="slide-left">
                     <h2 class="red-text">EMAIL INQUIRY</h2>
@@ -592,7 +600,6 @@
                 </div>
             </div>
 
-            <!-- TIMINGS SLIDE (ORANGE) -->
             <div class="slide" id="slide-timing">
                 <div class="slide-left">
                     <h2 class="orange-text">WORK SCHEDULE</h2>
@@ -633,7 +640,33 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
+    <div class="founder-wrapper">
+        <div class="founder-card">
+            <div class="founder-header">
+                <span class="version-tag">MRD LEADERSHIP</span>
+                <div class="founder-badge"><i data-lucide="users" size="14"></i> CREATORS</div>
+            </div>
+            <div class="founder-grid">
+                <div class="founder-box">
+                    <div class="founder-role">SON & DEVELOPER</div>
+                    <div class="founder-name">Ahmad Gondal</div>
+                    <div class="founder-desc">
+                        13 Y/O Young Graphic & Web App Designer.<br>
+                        Developer of MRD Corporation.
+                    </div>
+                </div>
+                <div class="founder-box">
+                    <div class="founder-role">FATHER & OWNER</div>
+                    <div class="founder-name">M. Zubair</div>
+                    <div class="founder-desc">
+                        Real Estate Work in Rawalpindi (RWP).<br>
+                        Property Dealer & Business Lead.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast" id="toast">
         <i data-lucide="check-circle" size="18"></i>
         <span id="toast-msg">Copied!</span>
@@ -701,4 +734,3 @@
     </script>
 </body>
 </html>
-
