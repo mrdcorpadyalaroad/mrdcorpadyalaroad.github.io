@@ -24,7 +24,6 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      padding-bottom: 20px;
     }
 
     .container {
@@ -34,98 +33,151 @@
       width: 100%;
     }
 
-    /* OFFICIAL BRAND CARD */
+    /* HEADER / NAVBAR */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #00ff88;
+      letter-spacing: 1px;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      color: #888888;
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 30px auto;
+    }
+
+    /* BRAND CARDS GRID */
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
     .brand-card {
       border: 1px solid rgba(0, 255, 136, 0.2);
-      border-radius: 16px;
-      padding: 24px;
-      background: rgba(255, 255, 255, 0.02);
-      max-width: 400px;
-      margin-bottom: 40px;
+      border-radius: 20px;
+      padding: 28px;
+      background: rgba(0, 255, 136, 0.02);
+      box-shadow: 0 0 20px rgba(0, 255, 136, 0.03);
+      transition: all 0.3s ease;
+    }
+
+    .brand-card:hover {
+      border-color: rgba(0, 255, 136, 0.5);
+      box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+      transform: translateY(-4px);
     }
 
     .brand-card .tag {
       font-size: 11px;
-      color: #808080;
+      color: #a0a0a0;
       letter-spacing: 2px;
       font-weight: 700;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       text-transform: uppercase;
     }
 
     .brand-content {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
     .brand-icon {
-      width: 50px;
-      height: 50px;
-      border: 1px solid rgba(0, 255, 136, 0.4);
-      border-radius: 12px;
+      width: 56px;
+      height: 56px;
+      border: 1.5px solid #00ff88;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #00ff88;
+      background: rgba(0, 255, 136, 0.05);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+      flex-shrink: 0;
     }
 
     .brand-info h2 {
       color: #00ff88;
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 800;
       margin: 0;
       line-height: 1;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
     }
 
     .brand-info p {
       color: #00ff88;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 800;
       letter-spacing: 1px;
       margin-top: 6px;
+      text-transform: uppercase;
     }
 
-    /* BIG HOVER TEXT SECTION (AT THE VERY BOTTOM) */
+    /* BIG HOVER TEXT SECTION AT THE VERY BOTTOM */
     .footer-hero-section {
       width: 100%;
-      padding: 80px 20px;
+      padding: 100px 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: transparent;
-      overflow: hidden;
       margin-top: auto;
     }
 
     .big-outlined-text {
-      font-size: clamp(3.5rem, 14vw, 11rem);
+      font-size: clamp(3.5rem, 15vw, 12rem);
       font-weight: 900;
       letter-spacing: 6px;
       color: transparent;
       -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.15);
-      transition: all 0.5s ease-in-out;
+      transition: all 0.4s ease-in-out;
       cursor: pointer;
       user-select: none;
       text-align: center;
     }
 
-    /* HOVER EFFECT: WHITE & CYAN GLOW (MATCHES THEME, NO PINK) */
     .big-outlined-text:hover {
       color: #ffffff;
       -webkit-text-stroke: 1.5px #ffffff;
-      text-shadow: 0 0 25px rgba(255, 255, 255, 0.7),
-                   0 0 50px rgba(0, 229, 255, 0.4);
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.8),
+                   0 0 60px rgba(0, 229, 255, 0.4);
       transform: scale(1.02);
     }
 
     /* FOOTER CREDITS */
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 30px 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       color: #888888;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     footer p {
@@ -136,27 +188,41 @@
 <body>
 
   <div class="container">
-    <!-- BRAND CARD -->
-    <div class="brand-card">
-      <div class="tag">OFFICIAL BRAND</div>
-      <div class="brand-content">
-        <div class="brand-icon">
-          <i data-lucide="building-2"></i>
-        </div>
-        <div class="brand-info">
-          <h2>MRD</h2>
-          <p>REAL ESTATE ADYALA ROAD</p>
+    <!-- HEADER -->
+    <header>
+      <div class="logo">MRD CORP</div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1>Official Portal</h1>
+      <p>Real Estate & Business Solutions</p>
+    </section>
+
+    <!-- BRAND CARDS GRID -->
+    <div class="brand-grid">
+      <!-- UPDATED CARD (REAL ESTATE ADYALA ROAD) -->
+      <div class="brand-card">
+        <div class="tag">OFFICIAL BRAND</div>
+        <div class="brand-content">
+          <div class="brand-icon">
+            <i data-lucide="building-2" size="28"></i>
+          </div>
+          <div class="brand-info">
+            <h2>MRD</h2>
+            <p>REAL ESTATE ADYALA ROAD</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- BIG HOVER TEXT SECTION -->
+  <!-- BIG HOVER TEXT SECTION (ADDED AT THE VERY BOTTOM - LIKE VIDEO) -->
   <section class="footer-hero-section">
     <h1 class="big-outlined-text">MRD CORP</h1>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER CREDITS -->
   <footer>
     <p>© 2026 MRD CORP. All rights reserved.</p>
     <p>ENGINEERED WITH ❤️ BY M. AHMAD RAZA</p>
