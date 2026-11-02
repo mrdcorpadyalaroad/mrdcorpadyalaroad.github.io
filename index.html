@@ -1,820 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MRD CORPORATION</title>
-
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='16' height='20' x='4' y='2' rx='2' ry='2'/><path d='M9 22v-4h6v4'/><path d='M8 6h.01'/><path d='M16 6h.01'/><path d='M12 6h.01'/><path d='M12 14h.01'/><path d='M16 14h.01'/><path d='M16 14h.01'/><path d='M8 10h.01'/><path d='M8 14h.01'/></svg>">
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: #060709;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            padding-bottom: 20px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 48px;
-            max-width: 1400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .logo-icon {
-            color: #ffffff;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-btn:hover {
-            border-color: #00ff66;
-            color: #00ff66;
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
-        }
-
-        .hero {
-            text-align: center;
-            padding: 40px 20px 20px 20px;
-        }
-
-        .hero h1 {
-            font-size: 72px;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 span {
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-        }
-
-        .hero p {
-            color: #8f9ba8;
-            font-size: 18px;
-            max-width: 650px;
-            margin: 0 auto 32px auto;
-            line-height: 1.5;
-        }
-
-        .tab-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-            padding: 0 16px;
-        }
-
-        .tab-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #8f9ba8;
-            padding: 12px 32px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tab-btn.tab-blue.active {
-            background: rgba(0, 176, 255, 0.08);
-            border-color: #00b0ff;
-            color: #00b0ff;
-            box-shadow: 0 0 20px rgba(0, 176, 255, 0.3);
-        }
-
-        .tab-btn.tab-red.active {
-            background: rgba(255, 51, 88, 0.08);
-            border-color: #ff3358;
-            color: #ff3358;
-            box-shadow: 0 0 20px rgba(255, 51, 88, 0.3);
-        }
-
-        .tab-btn.tab-orange.active {
-            background: rgba(255, 120, 0, 0.08);
-            border-color: #ff7800;
-            color: #ff7800;
-            box-shadow: 0 0 20px rgba(255, 120, 0, 0.3);
-        }
-
-        .main-wrapper {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            overflow: hidden;
-            flex: 1;
-        }
-
-        .content-slider {
-            display: flex;
-            width: 300%;
-            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        }
-
-        .slide {
-            width: 33.333%;
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 40px;
-            align-items: center;
-            padding-bottom: 40px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .slide.active-slide {
-            opacity: 1;
-        }
-
-        .slide-left h2 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            letter-spacing: -0.5px;
-        }
-
-        .blue-text { color: #00b0ff; text-shadow: 0 0 20px rgba(0, 176, 255, 0.3); }
-        .red-text { color: #ff3358; text-shadow: 0 0 20px rgba(255, 51, 88, 0.3); }
-        .orange-text { color: #ff7800; text-shadow: 0 0 20px rgba(255, 120, 0, 0.3); }
-
-        .slide-left .subtitle {
-            color: #8f9ba8;
-            font-size: 16px;
-            margin-bottom: 28px;
-            line-height: 1.6;
-        }
-
-        .features-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 36px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .feature-icon {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .green-icon { 
-            border: 1.5px solid #00ff66; 
-            color: #00ff66; 
-            box-shadow: 0 0 12px rgba(0, 255, 102, 0.4); 
-            background: rgba(0, 255, 102, 0.05);
-        }
-
-        .red-icon { border: 1.5px solid #ff3358; color: #ff3358; box-shadow: 0 0 10px rgba(255, 51, 88, 0.3); }
-        .orange-icon { border: 1.5px solid #ff7800; color: #ff7800; box-shadow: 0 0 10px rgba(255, 120, 0, 0.3); }
-
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 15px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            width: auto;
-        }
-
-        .blue-btn { background: #00b0ff; color: #ffffff; box-shadow: 0 0 25px rgba(0, 176, 255, 0.4); }
-        .blue-btn:hover { background: #33c0ff; box-shadow: 0 0 35px rgba(0, 176, 255, 0.6); }
-
-        .red-btn { background: #ff3358; color: #ffffff; box-shadow: 0 0 25px rgba(255, 51, 88, 0.4); }
-        .red-btn:hover { background: #ff5c7a; box-shadow: 0 0 35px rgba(255, 51, 88, 0.6); }
-
-        .orange-btn { background: #ff7800; color: #ffffff; box-shadow: 0 0 25px rgba(255, 120, 0, 0.4); }
-        .orange-btn:hover { background: #ff8c1a; box-shadow: 0 0 35px rgba(255, 120, 0, 0.6); }
-
-        .card-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .card {
-            background: rgba(13, 17, 23, 0.8);
-            border-radius: 24px;
-            padding: 40px;
-            position: relative;
-            backdrop-filter: blur(20px);
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-        }
-
-        .card.blue-card { border: 1px solid rgba(0, 176, 255, 0.3); }
-        .card.red-card { border: 1px solid rgba(255, 51, 88, 0.3); }
-        .card.orange-card { border: 1px solid rgba(255, 120, 0, 0.3); }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .version-tag {
-            font-family: 'JetBrains Mono', monospace;
-            color: #8f9ba8;
-            font-size: 13px;
-            word-break: break-all;
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-        }
-
-        .blue-badge { background: rgba(0, 176, 255, 0.1); border: 1px solid rgba(0, 176, 255, 0.3); color: #00b0ff; }
-        .red-badge { background: rgba(255, 51, 88, 0.1); border: 1px solid rgba(255, 51, 88, 0.3); color: #ff3358; }
-        .orange-badge { background: rgba(255, 120, 0, 0.1); border: 1px solid rgba(255, 120, 0, 0.3); color: #ff7800; }
-        .green-badge { background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.3); color: #00ff66; }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-
-        .blue-dot { background-color: #00b0ff; box-shadow: 0 0 8px #00b0ff; }
-        .red-dot { background-color: #ff3358; box-shadow: 0 0 8px #ff3358; }
-        .orange-dot { background-color: #ff7800; box-shadow: 0 0 8px #ff7800; }
-        .green-dot { background-color: #00ff66; box-shadow: 0 0 8px #00ff66; }
-
-        .card-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-        }
-
-        .blue-wrapper { border: 1px solid rgba(0, 176, 255, 0.4); background: rgba(0, 176, 255, 0.05); color: #ffffff; }
-        .red-wrapper { border: 1px solid rgba(255, 51, 88, 0.4); background: rgba(255, 51, 88, 0.05); color: #ffffff; }
-        .orange-wrapper { border: 1px solid rgba(255, 120, 0, 0.4); background: rgba(255, 120, 0, 0.05); color: #ffffff; }
-        .green-wrapper { border: 1px solid rgba(0, 255, 102, 0.4); background: rgba(0, 255, 102, 0.05); color: #00ff66; }
-
-        .card-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .blue-title { color: #00b0ff; }
-        .red-title { color: #ff3358; }
-        .orange-title { color: #ff7800; }
-
-        .card-subtitle {
-            font-size: 11px;
-            font-weight: 700;
-            color: #8f9ba8;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .card-desc {
-            color: #8f9ba8;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .timing-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            font-size: 14px;
-            gap: 10px;
-        }
-
-        .timing-row:last-child {
-            border-bottom: none;
-        }
-
-        .timing-day {
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .timing-status {
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            white-space: nowrap;
-        }
-
-        .status-open {
-            background: rgba(255, 120, 0, 0.15);
-            color: #ff7800;
-        }
-
-        .status-off {
-            background: rgba(255, 50, 50, 0.15);
-            color: #ff4d4d;
-        }
-
-        /* BOTTOM SECTION: GREEN MRD CARD & FOUNDER SECTION */
-        .bottom-section {
-            max-width: 1200px;
-            width: 100%;
-            margin: 40px auto 0 auto;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-
-        .founder-card {
-            width: 100%;
-            background: rgba(13, 17, 23, 0.85);
-            border: 1px solid rgba(168, 85, 247, 0.35);
-            border-radius: 24px;
-            padding: 32px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 30px rgba(168, 85, 247, 0.08);
-            position: relative;
-        }
-
-        .mrd-video-card {
-            width: 100%;
-            background: rgba(13, 17, 23, 0.85);
-            border: 1px solid rgba(0, 255, 102, 0.35);
-            border-radius: 24px;
-            padding: 32px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.08);
-            position: relative;
-        }
-
-        .founder-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .founder-badge {
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            color: #a855f7;
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .founder-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .founder-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .founder-role {
-            font-size: 11px;
-            font-weight: 800;
-            color: #a855f7;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-
-        .founder-name {
-            font-size: 20px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .founder-desc {
-            font-size: 13px;
-            color: #8f9ba8;
-            line-height: 1.5;
-        }
-
-        .mrd-green-logo {
-            font-size: 32px;
-            font-weight: 900;
-            color: #00ff66;
-            text-shadow: 0 0 20px rgba(0, 255, 102, 0.6);
-            letter-spacing: 1px;
-        }
-
-        /* FOOTER COPYRIGHT BAR */
-        footer {
-            max-width: 1200px;
-            width: 100%;
-            margin: 50px auto 10px auto;
-            padding: 20px 24px 0 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            color: #8f9ba8;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .footer-left {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .footer-right {
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .footer-right span {
-            color: #00ff66;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #ffffff;
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        @media (max-width: 900px) {
-            header { padding: 20px; }
-            .hero { padding: 20px 16px 10px 16px; }
-            .hero h1 { font-size: 38px; letter-spacing: -0.5px; }
-            .hero p { font-size: 15px; margin-bottom: 24px; }
-            .tab-container { gap: 8px; margin-bottom: 30px; }
-            .tab-btn { padding: 10px 18px; font-size: 11px; flex: 1 1 auto; justify-content: center; }
-            .main-wrapper { padding: 0 16px; }
-            .slide { grid-template-columns: 1fr; gap: 30px; padding-bottom: 30px; }
-            .slide-left h2 { font-size: 32px; }
-            .slide-left .subtitle { font-size: 14px; margin-bottom: 20px; }
-            .features-list { gap: 12px; margin-bottom: 24px; }
-            .feature-item { font-size: 14px; }
-            .action-btn { width: 100%; padding: 14px 20px; font-size: 14px; }
-            .card { padding: 24px; border-radius: 18px; }
-            .card-title { font-size: 22px; }
-            .bottom-section { grid-template-columns: 1fr; gap: 20px; }
-            .founder-grid { grid-template-columns: 1fr; gap: 14px; }
-            .founder-card, .mrd-video-card { padding: 20px; }
-            footer { flex-direction: column; text-align: center; gap: 8px; }
-            .toast { left: 20px; right: 20px; bottom: 20px; justify-content: center; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MRD Corporation</title>
+<meta name="description" content="MRD Corporation: call, email, working hours and 200+ homes in Rawalpindi.">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0B12;--tx:#F5F6FA;--mu:#AEB2C7;--glass:rgba(255,255,255,.07);--bd:rgba(255,255,255,.2);--hl:rgba(255,255,255,.14);--sh:rgba(0,0,0,.35);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#F1EFFA;--tx:#15162B;--mu:#4A4E68;--glass:rgba(255,255,255,.5);--bd:rgba(255,255,255,.9);--hl:rgba(255,255,255,.8);--sh:rgba(60,50,120,.18)}}
+:root[data-theme="dark"]{--bg:#0A0B12;--tx:#F5F6FA;--mu:#AEB2C7;--glass:rgba(255,255,255,.07);--bd:rgba(255,255,255,.2);--hl:rgba(255,255,255,.14);--sh:rgba(0,0,0,.35)}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Manrope,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+h1,h2{font-family:Unbounded,Manrope,sans-serif;font-weight:800;line-height:1.08;letter-spacing:-.02em;margin:0 0 18px}
+.sl{position:relative;overflow:hidden;min-height:100svh;display:flex;align-items:center;padding:110px 6vw 70px;box-sizing:border-box;scroll-snap-align:start}
+.sl::before,.sl::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;animation:fl 14s ease-in-out infinite alternate}
+.sl::before{width:46vmax;height:46vmax;left:-14vmax;top:-12vmax;background:var(--c1)}
+.sl::after{width:40vmax;height:40vmax;right:-12vmax;bottom:-12vmax;background:var(--c2);animation-delay:-6s}
+@keyframes fl{to{transform:translate(5vmax,4vmax) scale(1.15)}}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.one{grid-template-columns:1fr}
+.hero{--c1:#A78BFA;--c2:#38D9FF}.ph{--c1:#34E0B1;--c2:#38BDF8}.em{--c1:#FF7AAE;--c2:#FFB84D}.tm{--c1:#A78BFA;--c2:#F472B6}.hm{--c1:#FFA04D;--c2:#FB7185}.tl{--c1:#22D3EE;--c2:#818CF8}
+.ac{background:linear-gradient(120deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.eb{font-size:13px;font-weight:800;letter-spacing:.18em;margin-bottom:14px;display:block}
+p.lead{color:var(--mu);font-size:18px;margin:0 0 22px;max-width:520px}
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(20px) saturate(150%);backdrop-filter:blur(20px) saturate(150%);border:1px solid var(--bd);border-radius:28px;box-shadow:0 20px 50px var(--sh),inset 0 1px 0 var(--hl);padding:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:14px 26px;border-radius:16px;border:0;font:800 15px Manrope,sans-serif;cursor:pointer;color:#0A0B12;background:linear-gradient(135deg,var(--c1),var(--c2));transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px var(--sh)}
+.btn.g{background:var(--glass);color:var(--tx);border:1px solid var(--bd);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.bar{display:flex;gap:12px;flex-wrap:wrap}
+.big{font-family:Unbounded,Manrope,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.1;word-break:break-word}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:99px;font-size:14px;font-weight:600;background:var(--glass);border:1px solid var(--bd);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.dot{width:10px;height:10px;border-radius:50%;background:#34E0B1;box-shadow:0 0 0 4px rgba(52,224,177,.25)}.off .dot{background:#FF7A7A;box-shadow:0 0 0 4px rgba(255,122,122,.25)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 22px;border-radius:18px;font-weight:600;flex-wrap:wrap}
+.row+.row{margin-top:6px}.row b{font-family:Unbounded,Manrope,sans-serif;font-size:17px}.row span{color:var(--mu)}
+.row.today{background:var(--hl);box-shadow:inset 0 0 0 1px var(--bd)}
+.cl{color:#E5484D!important;font-weight:800}
+.city{border-radius:28px;overflow:hidden;border:1px solid var(--bd);box-shadow:0 20px 50px var(--sh);background:linear-gradient(180deg,#3A1F6B,#C2458F 55%,#FF9A5A);margin-top:30px}
+.city svg{display:block;width:100%;height:auto}
+.nv{position:fixed;z-index:20;top:calc(14px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(960px,calc(100% - 28px));box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px 10px 22px;border-radius:99px}
+.nv .lg{font-family:Unbounded,sans-serif;font-weight:800}
+.nv nav{display:flex;gap:4px}.nv nav a{padding:8px 14px;border-radius:99px;font-size:14px;font-weight:600;color:var(--mu)}
+.nv nav a.on,.nv nav a:hover{background:var(--hl);color:var(--tx)}
+.nv .btn{min-height:40px;padding:8px 20px}
+#pg{position:fixed;z-index:30;top:env(safe-area-inset-top,0px);left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#A78BFA,#FF7AAE,#FFB84D)}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.av{width:60px;height:60px;border-radius:20px;display:flex;align-items:center;justify-content:center;font:800 24px Unbounded,sans-serif;color:#0A0B12;background:linear-gradient(135deg,var(--c1),var(--c2));margin-bottom:16px}
+.wm{font-family:Unbounded,sans-serif;font-weight:800;font-size:clamp(90px,22vw,260px);line-height:1;letter-spacing:-.04em;text-align:center;margin:44px 0 10px;background:linear-gradient(120deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.8}
+.ft{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;letter-spacing:.08em;padding:18px 26px;border-radius:99px}
+.rv{opacity:0;transform:translateX(-90px) scale(.97);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.rv.r{transform:translateX(90px) scale(.97)}.rv.u{transform:translateY(60px) scale(.97)}
+.rv.in{opacity:1;transform:none}
+#toast{position:fixed;z-index:40;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);opacity:0;padding:12px 24px;border-radius:99px;font-weight:800;transition:.3s;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:860px){.wrap,.team{grid-template-columns:1fr}.nv nav{display:none}.sl{padding-top:100px}.glass{padding:26px;border-radius:24px}.ft{border-radius:24px}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.sl::before,.sl::after{animation:none}html{scroll-behavior:auto}}
+</style>
+<noscript><style>.rv{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
+<div id="pg"></div>
+<header class="nv glass"><a class="lg" href="#top">MRD<span class="ac">.</span></a>
+<nav><a href="#phone">Phone</a><a href="#email">Email</a><a href="#timings">Timings</a><a href="#homes">Homes</a><a href="#team">Team</a></nav>
+<a class="btn" href="tel:+923132662426" style="--c1:#34E0B1;--c2:#38BDF8">Call now</a></header>
 
-    <header>
-        <div class="logo">
-            <i data-lucide="building-2" class="logo-icon"></i>
-            <span>MRD</span>
-        </div>
-        <div class="nav-links">
-            <button class="nav-btn" onclick="copyText('0313266242', 'Phone number copied!')">CONTACT US</button>
-        </div>
-    </header>
+<section class="sl hero" id="top"><div class="wrap one" style="text-align:center;justify-items:center">
+<div class="rv u"><span class="eb ac">NEXT-GENERATION COMMUNICATION</span>
+<h1 class="big" style="font-size:clamp(44px,9vw,110px)">MRD <span class="ac">CORPORATION</span></h1>
+<p class="lead" style="margin:0 auto 26px">Connecting businesses with next-generation communication systems, and helping families find the right home in Rawalpindi.</p>
+<div class="bar" style="justify-content:center"><a class="btn" href="#phone">Contact us</a><a class="btn g" href="#homes">See our homes</a></div>
+<p style="margin-top:26px"><span class="pill st"><span class="dot"></span><span class="stt">Checking hours…</span></span></p></div>
+</div></section>
 
-    <section class="hero">
-        <h1>MRD <span>CORPORATION</span></h1>
-        <p>Connecting businesses with next-generation communication systems. Reach out via phone, email, or check operating hours.</p>
-    </section>
+<section class="sl ph" id="phone"><div class="wrap">
+<div class="rv"><span class="eb ac">01 · DIRECT CALL</span><h2 style="font-size:clamp(32px,5vw,54px)">Talk to a real person, <span class="ac">right now.</span></h2>
+<p class="lead">Property visits, house enquiries and system integration. Call or message and get guidance the same day.</p>
+<span class="pill st"><span class="dot"></span><span class="stt"></span></span></div>
+<div class="glass rv r" style="--d:.15s"><span class="eb" style="color:var(--mu)">MOBILE · REPRESENTATIVE</span>
+<div class="big" style="font-size:clamp(30px,4.6vw,50px);margin-bottom:26px">0313 266 2426</div>
+<div class="bar"><a class="btn" href="tel:+923132662426">Call now</a><button class="btn g" data-copy="03132662426">Copy number</button><a class="btn g" href="https://wa.me/923132662426">WhatsApp</a></div></div>
+</div></section>
 
-    <div class="tab-container">
-        <button class="tab-btn tab-blue active" id="tab-phone" onclick="switchTab('phone')">
-            <i data-lucide="phone" size="16"></i> PHONE
-        </button>
-        <button class="tab-btn tab-red" id="tab-email" onclick="switchTab('email')">
-            <i data-lucide="mail" size="16"></i> EMAIL
-        </button>
-        <button class="tab-btn tab-orange" id="tab-timing" onclick="switchTab('timing')">
-            <i data-lucide="clock" size="16"></i> TIMINGS
-        </button>
-    </div>
+<section class="sl em" id="email"><div class="wrap">
+<div class="glass rv" style="--d:.15s"><span class="eb" style="color:var(--mu)">OFFICIAL MAILBOX</span>
+<div class="big" style="font-size:clamp(22px,3.2vw,34px);margin-bottom:26px">mzgondal58@gmail.com</div>
+<div class="bar"><a class="btn" href="mailto:mzgondal58@gmail.com">Send email</a><button class="btn g" data-copy="mzgondal58@gmail.com">Copy email</button></div></div>
+<div class="rv r"><span class="eb ac">02 · EMAIL INQUIRY</span><h2 style="font-size:clamp(32px,5vw,54px)">Send details, <span class="ac">proposals</span> and documents.</h2>
+<p class="lead">For property requirements, business partnerships and formal documentation, write to us any time.</p></div>
+</div></section>
 
-    <div class="main-wrapper">
-        <div class="content-slider" id="slider">
+<section class="sl tm" id="timings"><div class="wrap">
+<div class="rv"><span class="eb ac">03 · WORK SCHEDULE</span><h2 style="font-size:clamp(32px,5vw,54px)">Know exactly when <span class="ac">we’re available.</span></h2>
+<p class="lead">Check our weekly hours before you call or plan a visit. All times are Pakistan Standard Time.</p>
+<span class="pill st"><span class="dot"></span><span class="stt"></span></span></div>
+<div class="glass rv r" style="--d:.15s;padding:18px">
+<div class="row" data-d="1234"><b>Mon – Thu</b><span class="hrs"></span></div>
+<div class="row" data-d="5"><b>Friday</b><span class="cl">Weekly off</span></div>
+<div class="row" data-d="60"><b>Sat – Sun</b><span class="hrs"></span></div></div>
+</div></section>
 
-            <div class="slide active-slide" id="slide-phone">
-                <div class="slide-left">
-                    <h2 class="blue-text">DIRECT CALL</h2>
-                    <p class="subtitle">Immediate assistance available for inquiries and system integration.</p>
-                    <ul class="features-list">
-                        <li class="feature-item"><div class="feature-icon green-icon"><i data-lucide="check" size="14"></i></div> Direct Line Support</li>
-                        <li class="feature-item"><div class="feature-icon green-icon"><i data-lucide="check" size="14"></i></div> Instant Response Time</li>
-                        <li class="feature-item"><div class="feature-icon green-icon"><i data-lucide="check" size="14"></i></div> Active Hours Coverage</li>
-                    </ul>
-                    <button class="action-btn blue-btn" onclick="copyText('0313266242', 'Phone number copied!')">COPY PHONE <i data-lucide="copy" size="18"></i></button>
-                </div>
-                <div class="card-container">
-                    <div class="card blue-card">
-                        <div class="card-header">
-                            <span class="version-tag">0313266242</span>
-                            <div class="status-badge blue-badge"><div class="status-dot blue-dot"></div> ACTIVE NOW</div>
-                        </div>
-                        <div class="card-icon-wrapper blue-wrapper"><i data-lucide="building-2" size="28"></i></div>
-                        <div class="card-title blue-title">PHONE CONTACT</div>
-                        <div class="card-subtitle">MOBILE COMMUNICATIONS</div>
-                        <div class="card-desc">Connect directly to our representative for instant guidance and real-time updates regarding MRD Corporation services.</div>
-                    </div>
-                </div>
-            </div>
+<section class="sl hm" id="homes"><div class="wrap one">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap">
+<div class="rv"><span class="eb ac">04 · MRD REAL ESTATE</span><h2 style="font-size:clamp(34px,6vw,66px);margin:0">200+ homes <span class="ac">in stock.</span></h2></div>
+<div class="rv r" style="--d:.15s;max-width:380px"><p class="lead" style="font-size:16px">Single-storey, double-storey and rentals across Rawalpindi. Tell us what you need and we’ll arrange a visit.</p><a class="btn" href="https://wa.me/923132662426">Request the list</a></div></div>
+<div class="city rv u" style="--d:.2s" id="city" role="img" aria-label="Pixel illustration of a neighbourhood packed with houses"></div>
+</div></section>
 
-            <div class="slide" id="slide-email">
-                <div class="slide-left">
-                    <h2 class="red-text">EMAIL INQUIRY</h2>
-                    <p class="subtitle">Send detailed requests and proposal documents to our official support mail.</p>
-                    <ul class="features-list">
-                        <li class="feature-item"><div class="feature-icon red-icon"><i data-lucide="check" size="14"></i></div> Official Inquiries</li>
-                        <li class="feature-item"><div class="feature-icon red-icon"><i data-lucide="check" size="14"></i></div> Document Attachments</li>
-                        <li class="feature-item"><div class="feature-icon red-icon"><i data-lucide="check" size="14"></i></div> Automated Ticketing</li>
-                    </ul>
-                    <button class="action-btn red-btn" onclick="copyText('mzgondal58@gmail.com', 'Email address copied!')">COPY EMAIL <i data-lucide="copy" size="18"></i></button>
-                </div>
-                <div class="card-container">
-                    <div class="card red-card">
-                        <div class="card-header">
-                            <span class="version-tag">mzgondal58@gmail.com</span>
-                            <div class="status-badge red-badge"><div class="status-dot red-dot"></div> READY TO RECEIVE</div>
-                        </div>
-                        <div class="card-icon-wrapper red-wrapper"><i data-lucide="building-2" size="28"></i></div>
-                        <div class="card-title red-title">EMAIL SUPPORT</div>
-                        <div class="card-subtitle">OFFICIAL MAILBOX</div>
-                        <div class="card-desc">For technical questions, business partnerships, or formal documentation, reach out to our team anytime.</div>
-                    </div>
-                </div>
-            </div>
+<section class="sl tl" id="team"><div class="wrap one">
+<div class="rv"><span class="eb ac">05 · THE TEAM</span></div>
+<div class="team">
+<div class="glass rv" style="--d:.1s"><div class="av">A</div><h2 style="font-size:26px;margin-bottom:6px">Ahmad Gondal</h2><span class="eb ac" style="margin-bottom:8px">SON &amp; DEVELOPER</span><span style="color:var(--mu)">Graphic and web app designer, and developer of this website.</span></div>
+<div class="glass rv r" style="--d:.25s"><div class="av">M</div><h2 style="font-size:26px;margin-bottom:6px">M. Zubair Qadri</h2><span class="eb ac" style="margin-bottom:8px">FATHER &amp; CO-FOUNDER</span><span style="color:var(--mu)">Real estate work in Rawalpindi (RWP). Co-founder and business partner in MRD Corporation.</span></div></div>
+<div class="wm rv u">MRD</div>
+<footer class="ft glass rv u"><div>ENGINEERED WITH ❤️ BY <b>M. AHMAD RAZA</b></div><div style="color:var(--mu)">© 2026 MRD CORP. ALL RIGHTS RESERVED.</div></footer>
+</div></section>
+<div id="toast" class="glass">Copied!</div>
 
-            <div class="slide" id="slide-timing">
-                <div class="slide-left">
-                    <h2 class="orange-text">WORK SCHEDULE</h2>
-                    <p class="subtitle">Check our official weekly operational hours before scheduling a call or visiting.</p>
-                    <ul class="features-list">
-                        <li class="feature-item"><div class="feature-icon orange-icon"><i data-lucide="check" size="14"></i></div> Mon - Thu: Active Workdays</li>
-                        <li class="feature-item"><div class="feature-icon orange-icon"><i data-lucide="x" size="14"></i></div> Friday: Weekly Off</li>
-                        <li class="feature-item"><div class="feature-icon orange-icon"><i data-lucide="check" size="14"></i></div> Sat - Sun: Weekend Active</li>
-                    </ul>
-                    <button class="action-btn orange-btn" onclick="switchTab('phone')">CALL NOW <i data-lucide="arrow-right" size="18"></i></button>
-                </div>
-                <div class="card-container">
-                    <div class="card orange-card">
-                        <div class="card-header">
-                            <span class="version-tag">OPERATIONAL HOURS</span>
-                            <div class="status-badge orange-badge"><div class="status-dot orange-dot"></div> TIMINGS INFO</div>
-                        </div>
-                        <div class="card-icon-wrapper orange-wrapper"><i data-lucide="building-2" size="28"></i></div>
-                        <div class="card-title orange-title">WEEKLY TIMINGS</div>
-                        <div class="card-subtitle">MRD SCHEDULE</div>
-                        
-                        <div class="timing-row">
-                            <span class="timing-day">Monday – Thursday</span>
-                            <span class="timing-status status-open">WORKTIME</span>
-                        </div>
-                        <div class="timing-row">
-                            <span class="timing-day">Friday</span>
-                            <span class="timing-status status-off">OFF DAY</span>
-                        </div>
-                        <div class="timing-row">
-                            <span class="timing-day">Saturday – Sunday</span>
-                            <span class="timing-status status-open">WORKTIME</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="bottom-section">
-
-        <div class="mrd-video-card">
-            <div class="founder-header">
-                <span class="version-tag">OFFICIAL BRAND</span>
-                <div class="status-badge green-badge"><div class="status-dot green-dot"></div> ONLINE</div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
-                <div class="card-icon-wrapper green-wrapper" style="margin-bottom:0;"><i data-lucide="video" size="28"></i></div>
-                <div>
-                    <div class="mrd-green-logo">MRD</div>
-                    <div class="card-subtitle" style="color: #00ff66; margin-bottom:0;">REAL ESTATE</div>
-                </div>
-            </div>
-            <p class="card-desc">Good services Book now for visits of houses,want a double story house for example? message now on:03132662426.</p>
-        </div>
-
-        <div class="founder-card">
-            <div class="founder-header">
-                <span class="version-tag">MRD LEADERSHIP</span>
-                <div class="founder-badge"><i data-lucide="users" size="14"></i> CREATORS</div>
-            </div>
-            <div class="founder-grid">
-                <div class="founder-box">
-                    <div class="founder-role">SON & DEVELOPER</div>
-                    <div class="founder-name">Ahmad Gondal</div>
-                    <div class="founder-desc">
-                        13 Y/O Young Graphic & Web App Designer.<br>
-                        And dev of this website.
-                    </div>
-                </div>
-                <div class="founder-box">
-                    <div class="founder-role">FATHER & CO-FOUNDER</div>
-                    <div class="founder-name">M. Zubair Qadri</div>
-                    <div class="founder-desc">
-                        Real Estate Work in Rawalpindi (RWP).<br>
-                        Co-Founder & Business Partner in MRD Corporation.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <div class="footer-left">
-            © 2026 MRD CORP. All rights reserved.No one have right to distrbute our code or copy paste completely PROHIBITED
-        </div>
-        <div class="footer-right">
-            ENGINEERED WITH ❤️ BY <span>M. AHMAD RAZA</span>
-        </div>
-    </footer>
-
-    <div class="toast" id="toast">
-        <i data-lucide="check-circle" size="18"></i>
-        <span id="toast-msg">Copied!</span>
-    </div>
-
-    <script>
-        lucide.createIcons();
-
-        function switchTab(type) {
-            const slider = document.getElementById('slider');
-            const phoneBtn = document.getElementById('tab-phone');
-            const emailBtn = document.getElementById('tab-email');
-            const timingBtn = document.getElementById('tab-timing');
-
-            const phoneSlide = document.getElementById('slide-phone');
-            const emailSlide = document.getElementById('slide-email');
-            const timingSlide = document.getElementById('slide-timing');
-
-            phoneBtn.classList.remove('active');
-            emailBtn.classList.remove('active');
-            timingBtn.classList.remove('active');
-
-            phoneSlide.classList.remove('active-slide');
-            emailSlide.classList.remove('active-slide');
-            timingSlide.classList.remove('active-slide');
-
-            if (type === 'phone') {
-                slider.style.transform = 'translateX(0%)';
-                phoneBtn.classList.add('active');
-                phoneSlide.classList.add('active-slide');
-            } else if (type === 'email') {
-                slider.style.transform = 'translateX(-33.333%)';
-                emailBtn.classList.add('active');
-                emailSlide.classList.add('active-slide');
-            } else if (type === 'timing') {
-                slider.style.transform = 'translateX(-66.666%)';
-                timingBtn.classList.add('active');
-                timingSlide.classList.add('active-slide');
-            }
-        }
-
-        function copyText(text, message) {
-            navigator.clipboard.writeText(text).then(() => {
-                showToast(message);
-            }).catch(() => {
-                const area = document.createElement('textarea');
-                area.value = text;
-                document.body.appendChild(area);
-                area.select();
-                document.execCommand('copy');
-                document.body.removeChild(area);
-                showToast(message);
-            });
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-msg');
-            toastMsg.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2500);
-        }
-    </script>
+<script>
+// ===== EDIT HERE: opening hours (24h clock, Pakistan time) =====
+var CFG={open:10,close:19,offDay:5}; // offDay: 0=Sun ... 5=Friday
+function fmt(h){var x=h%12||12;return x+":00 "+(h<12?"AM":"PM")}
+var HRS=fmt(CFG.open)+" – "+fmt(CFG.close);
+document.querySelectorAll(".hrs").forEach(function(e){e.textContent=HRS});
+function now(){try{var p=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Karachi",weekday:"short",hour:"numeric",hour12:false}).formatToParts(new Date()),o={};p.forEach(function(x){o[x.type]=x.value});
+return{d:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(o.weekday),h:parseInt(o.hour,10)%24}}catch(e){var n=new Date();return{d:n.getDay(),h:n.getHours()}}}
+function status(){var t=now(),open=t.d!==CFG.offDay&&t.h>=CFG.open&&t.h<CFG.close;
+document.querySelectorAll(".st").forEach(function(e){e.classList.toggle("off",!open);e.querySelector(".stt").textContent=open?"Active now · until "+fmt(CFG.close):(t.d===CFG.offDay?"Closed today (weekly off)":"Closed right now · opens "+fmt(CFG.open))});
+document.querySelectorAll(".row").forEach(function(r){r.classList.toggle("today",r.dataset.d.indexOf(t.d)>-1)})}
+status();setInterval(status,60000);
+// copy buttons
+var tt;function toast(m){var e=document.getElementById("toast");e.textContent=m;e.classList.add("show");clearTimeout(tt);tt=setTimeout(function(){e.classList.remove("show")},1800)}
+document.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){var v=b.dataset.copy;
+function ok(){toast("Copied: "+v)}
+try{navigator.clipboard.writeText(v).then(ok,function(){fb(v);ok()})}catch(e){fb(v);ok()}})});
+function fb(v){var a=document.createElement("textarea");a.value=v;document.body.appendChild(a);a.select();try{document.execCommand("copy")}catch(e){}a.remove()}
+// slide-in on scroll
+var rv=document.querySelectorAll(".rv");
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.18});rv.forEach(function(e){io.observe(e)})}else{rv.forEach(function(e){e.classList.add("in")})}
+// nav highlight + progress bar
+var links=document.querySelectorAll(".nv nav a");
+if("IntersectionObserver" in window){var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id)})}})},{threshold:.5});document.querySelectorAll("section").forEach(function(s){so.observe(s)})}
+addEventListener("scroll",function(){var m=document.documentElement.scrollHeight-innerHeight;document.getElementById("pg").style.transform="scaleX("+(m>0?scrollY/m:0)+")"},{passive:true});
+// pixel neighbourhood (200+ tiny houses)
+(function(){var S={A:[14,10,"M3 0h8v1H3zM2 1h10v1H2zM1 2h12v1H1zM0 3h14v1H0z","M1 4h12v6H1z","M2 5h2v2H2zM10 5h2v2h-2z","M6 7h2v3H6z"],
+B:[12,14,"M2 0h8v1H2zM1 1h10v1H1zM0 2h12v1H0z","M1 3h10v11H1z","M2 4h2v2H2zM8 4h2v2H8zM2 8h2v2H2zM8 8h2v2H8z","M5 11h2v3H5z"],
+C:[14,9,"M0 0h14v1H0z","M1 1h12v8H1z","M2 3h6v3H2z","M10 5h2v4h-2z"]};
+var a=7;function R(){a|=0;a=a+1831565813|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}
+var pal=["#F5EFE6","#9DB4D4","#E8B98F","#8CCBB5","#C4B1E8","#FFD36B","#FF8FB1","#7C8AA5"],d="",g="",VW=1056,VH=380;
+for(var k in S){var s=S[k];d+='<symbol id="h'+k+'" viewBox="0 0 '+s[0]+" "+s[1]+'"><path d="'+s[2]+'" fill="#5B6075"/><path d="'+s[3]+'" fill="currentColor"/><path d="'+s[4]+'" fill="#FFD36B"/><path d="'+s[5]+'" fill="#1A1630"/></symbol>'}
+var sc=[1,1.15,1.3,1.45,1.6,1.8,2,2.2,2.4,2.6];
+sc.forEach(function(s,i){var b=110+i*28,x=-Math.floor(R()*20);g+='<g opacity="'+(.3+.7*i/9).toFixed(2)+'"><rect y="'+b+'" width="'+VW+'" height="'+(VH-b)+'" fill="#120E26"/>';
+while(x<VW){var k="AABBC".charAt(Math.floor(R()*5)),q=S[k],w=q[0]*2*s,h=q[1]*2*s;g+='<use href="#h'+k+'" x="'+x.toFixed(1)+'" y="'+(b-h).toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'" style="color:'+pal[Math.floor(R()*pal.length)]+'"/>';x+=w+2+Math.floor(R()*6)}g+="</g>"});
+document.getElementById("city").innerHTML='<svg viewBox="0 0 '+VW+" "+VH+'" shape-rendering="crispEdges" aria-hidden="true"><defs>'+d+"</defs>"+g+"</svg>"})();
+</script>
 </body>
 </html>
+
